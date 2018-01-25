@@ -19,6 +19,8 @@ export default class KeyedRepeater<T> implements Component {
         return {
             update: () => {
 
+                const ordering = [].slice.call(element.children);
+
                 const removed = state.filter(state =>
                     this.built.find(_ => _.key === state.key) === undefined);
                 removed.forEach(_ => _.renderings.forEach(_ => _.destroy()));
@@ -32,13 +34,12 @@ export default class KeyedRepeater<T> implements Component {
                         const existing = state[existingIndex];
                         existing.renderings.forEach(_ => _.update());
 
-                        if (existingIndex !== i) {
-                            templates.map((_, j) => {
-                                const existing = element.children[existingIndex * templates.length + j];
-                                element.insertBefore(existing,
-                                    element.children[i * templates.length + j]);
-                            });
-                        }
+                        templates.map((_, j) => {
+                            const existing = ordering[existingIndex * templates.length + j];
+                            const before = element.children[i * templates.length + j];
+                            if (existing !== before)
+                                element.insertBefore(existing, before);
+                        });
 
                         return existing;
 
@@ -53,8 +54,8 @@ export default class KeyedRepeater<T> implements Component {
                                 const rendering = built.component.render(clone);
                                 rendering.update();
 
-                                element.insertBefore(clone,
-                                    element.children[i * templates.length + j]);
+                                const before = element.children[i * templates.length + j];
+                                element.insertBefore(clone, before);
 
                                 return {
                                     update: () =>

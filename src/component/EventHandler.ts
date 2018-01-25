@@ -4,7 +4,7 @@ export default class EventHandler implements Component {
 
     constructor(
         private event: string,
-        private handler: (Event) => void) { }
+        private handler: (event: Event) => void) { }
 
     render(element: Element) {
 

@@ -11,14 +11,14 @@ export default class Repeater implements Component {
 
     render(element: Element) {
 
-        const templates = [].slice.call(element.children);
+        const templates: Element[] = [].slice.call(element.children);
         templates.forEach(_ => element.removeChild(_));
 
         const renderings = flatten<Rendering>(
             this.repeated.map(component =>
                 templates.map(template => {
 
-                    const clone = template.cloneNode(true);
+                    const clone = <Element>template.cloneNode(true);
                     const rendering = component.render(clone);
                     element.appendChild(clone);
 

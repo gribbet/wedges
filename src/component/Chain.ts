@@ -1,10 +1,11 @@
 import Component from "../Component";
+import Rendering from "../Rendering";
 
 export default class Chain implements Component {
 
     constructor(private component: Component) { }
 
-    render(element: Element) {
+    render(element: Element): Rendering {
         return this.component.render(element);
     }
 

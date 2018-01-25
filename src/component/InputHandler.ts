@@ -5,12 +5,12 @@ import EventHandler from "./EventHandler";
 export default class InputHandler extends Container {
     constructor(
         getter: () => string,
-        setter: (string) => void
+        setter: (value: string) => void
     ) {
         super([
             new AttributeSetter("value", getter),
             new EventHandler("input", event =>
-                setter(event.target.value))
+                setter((<HTMLInputElement>event.target).value))
         ]);
     }
 }

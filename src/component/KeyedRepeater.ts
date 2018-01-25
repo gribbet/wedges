@@ -6,12 +6,12 @@ export default class KeyedRepeater<T> implements Component {
 
     constructor(
         private keys: () => T[],
-        private component: (T) => Component) { }
+        private component: (key: T) => Component) { }
 
     render(element: Element) {
         let state: { key: T, renderings: Rendering[] }[] = [];
 
-        const templates = [].slice.call(element.children);
+        const templates: Element[] = [].slice.call(element.children);
         templates.forEach(_ => element.removeChild(_));
 
         return {
@@ -36,7 +36,7 @@ export default class KeyedRepeater<T> implements Component {
                             key: built.key,
                             renderings: templates.map((template, j) => {
 
-                                const clone = template.cloneNode(true);
+                                const clone = <Element>template.cloneNode(true);
                                 const rendering = built.component.render(clone);
                                 rendering.update();
                                 element.insertBefore(clone,

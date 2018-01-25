@@ -4,7 +4,7 @@ export default class Remover implements Component {
     constructor(private removed: () => boolean) { }
 
     render(element: Element) {
-        const children = [].slice.call(element.children);
+        const children: Element[] = [].slice.call(element.children);
 
         return {
             update: () => {

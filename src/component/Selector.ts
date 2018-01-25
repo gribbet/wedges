@@ -8,7 +8,7 @@ export default class Selector implements Component {
 
     render(element: Element) {
 
-        const selected = [].slice.call(
+        const selected: Element[] = [].slice.call(
             element.querySelectorAll(this.selector));
 
         let renderings = selected.map(_ =>

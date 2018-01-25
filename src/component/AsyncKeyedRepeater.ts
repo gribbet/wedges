@@ -7,7 +7,7 @@ export default class AsyncKeyedRepeater<T> extends Chain {
 
     constructor(
         private keys: () => Promise<T[]>,
-        component: (T) => Component) {
+        component: (key: T) => Component) {
         super(new KeyedRepeater<T>(() => this.built, component));
     }
 

@@ -1,9 +1,6 @@
 import Component from "../Component";
 import Rendering from "../Rendering";
-
-function flatten<T>(x: T[][]): T[] {
-    return [].concat.apply([], x);
-}
+import { flatten } from "../util";
 
 export default class Repeater implements Component {
 

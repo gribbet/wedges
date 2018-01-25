@@ -11,6 +11,7 @@ export default class Container implements Component {
         return {
             update: () =>
                 renderings.forEach(_ => _.update()),
+
             destroy: () =>
                 renderings.forEach(_ => _.destroy())
         }

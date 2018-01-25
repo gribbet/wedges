@@ -4,7 +4,8 @@ export default class ClassToggler implements Component {
 
     constructor(
         private className: string,
-        private toggled: () => boolean) { }
+        private toggled: () => boolean
+    ) { }
 
     render(element: Element) {
 
@@ -13,6 +14,7 @@ export default class ClassToggler implements Component {
         return {
             update: () =>
                 element.classList.toggle(this.className, this.toggled()),
+
             destroy: () =>
                 element.classList.toggle(this.className, original)
         };

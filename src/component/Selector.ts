@@ -4,7 +4,8 @@ export default class Selector implements Component {
 
     constructor(
         private selector: string,
-        private component: Component) { }
+        private component: Component
+    ) { }
 
     render(element: Element) {
 
@@ -17,6 +18,7 @@ export default class Selector implements Component {
         return {
             update: () =>
                 renderings.forEach(_ => _.update()),
+
             destroy: () =>
                 renderings.forEach(_ => _.destroy())
         };

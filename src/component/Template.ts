@@ -1,7 +1,6 @@
 import Component from "../Component";
 
 export default class Template implements Component {
-    private template: Element[];
 
     constructor(template: Element | string) {
 
@@ -12,6 +11,8 @@ export default class Template implements Component {
         } else
             this.template = [<Element>template.cloneNode(true)];
     }
+
+    private template: Element[];
 
     render(element: Element) {
 

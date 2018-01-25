@@ -3,6 +3,7 @@ import Container from "./Container";
 import EventHandler from "./EventHandler";
 
 export default class InputHandler extends Container {
+
     constructor(
         getter: () => string,
         setter: (value: string) => void

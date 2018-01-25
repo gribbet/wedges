@@ -2,9 +2,10 @@ import Component from "../Component";
 import Rendering from "../Rendering";
 
 export default class Updater implements Component {
-    private built: Component | null = null;
 
     constructor(private component: () => Component | null) { }
+
+    private built: Component | null = null;
 
     render(element: Element) {
 

@@ -11,6 +11,7 @@ export default class Label implements Component {
         return {
             update: () =>
                 element.textContent = this.value(),
+
             destroy: () =>
                 element.textContent = original
         }

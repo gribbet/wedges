@@ -1,8 +1,6 @@
 import Component from "./Component";
 
 export default class Application {
-    private loading: (loading: boolean) => void =
-        loading => undefined;
 
     constructor(
         private component: Component,
@@ -12,6 +10,8 @@ export default class Application {
         this.loading = loading || this.loading;
     }
 
+    private loading: (loading: boolean) => void =
+        loading => undefined;
     private readonly started = new Promise(resolve =>
         this.start = async () => {
             resolve();
@@ -24,14 +24,22 @@ export default class Application {
     async start() { }
 
     update(trigger?: () => void) {
-        return this.last = this.last.then(async () => {
-            this.loading(true);
-            if (trigger) trigger();
-            await this.component.load();
-            this.start();
-            (await this.rendering).update();
-            this.loading(false);
-        })
+        return this.last =
+            this.last
+                .then(async () => {
+
+                    this.loading(true);
+
+                    if (trigger) trigger();
+
+                    await this.component.load();
+
+                    this.start();
+
+                    (await this.rendering).update();
+
+                    this.loading(false);
+                })
     }
 
     async stop() {

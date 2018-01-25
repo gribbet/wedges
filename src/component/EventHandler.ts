@@ -4,7 +4,8 @@ export default class EventHandler implements Component {
 
     constructor(
         private event: string,
-        private handler: (event: Event) => void) { }
+        private handler: (event: Event) => void
+    ) { }
 
     render(element: Element) {
 
@@ -13,6 +14,7 @@ export default class EventHandler implements Component {
 
         return {
             update: () => undefined,
+
             destroy: () =>
                 element.removeEventListener(this.event, handler)
         };

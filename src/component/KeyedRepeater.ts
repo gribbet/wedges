@@ -2,11 +2,13 @@ import Component from "../Component";
 import Rendering from "../Rendering";
 
 export default class KeyedRepeater<T> implements Component {
-    private built: { key: T, component: Component }[] = [];
 
     constructor(
         private keys: () => T[],
-        private component: (key: T) => Component) { }
+        private component: (key: T) => Component
+    ) { }
+
+    private built: { key: T, component: Component }[] = [];
 
     render(element: Element) {
         let state: { key: T, renderings: Rendering[] }[] = [];
@@ -27,14 +29,17 @@ export default class KeyedRepeater<T> implements Component {
 
                     if (existingIndex !== -1) {
 
-                        templates.map((_, j) => {
-                            const existing = element.children[existingIndex * templates.length + j];
-                            element.insertBefore(existing,
-                                element.children[i * templates.length + j]);
-                        });
-
                         const existing = state[existingIndex];
                         existing.renderings.forEach(_ => _.update());
+
+                        if (existingIndex !== i) {
+                            templates.map((_, j) => {
+                                const existing = element.children[existingIndex * templates.length + j];
+                                element.insertBefore(existing,
+                                    element.children[i * templates.length + j]);
+                            });
+                        }
+
                         return existing;
 
                     } else {
@@ -44,14 +49,17 @@ export default class KeyedRepeater<T> implements Component {
                             renderings: templates.map((template, j) => {
 
                                 const clone = <Element>template.cloneNode(true);
+
                                 const rendering = built.component.render(clone);
                                 rendering.update();
+
                                 element.insertBefore(clone,
                                     element.children[i * templates.length + j]);
 
                                 return {
                                     update: () =>
                                         rendering.update(),
+
                                     destroy: () => {
                                         element.removeChild(clone);
                                         rendering.destroy();

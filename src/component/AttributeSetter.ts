@@ -1,7 +1,11 @@
 import Component from "../Component";
 
 export default class AttributeSetter implements Component {
-    constructor(private attribute: string, private value: () => string) { }
+
+    constructor(
+        private attribute: string,
+        private value: () => string
+    ) { }
 
     render(element: Element) {
         const original = element.getAttribute(this.attribute);
@@ -9,6 +13,7 @@ export default class AttributeSetter implements Component {
         return {
             update: () =>
                 element.setAttribute(this.attribute, this.value()),
+
             destroy: () => {
                 if (original === null)
                     element.removeAttribute(this.attribute);

@@ -25,6 +25,7 @@ export default class Repeater implements Component {
                     return {
                         update: () =>
                             rendering.update(),
+
                         destroy: () => {
                             rendering.destroy();
                             element.removeChild(clone);
@@ -35,6 +36,7 @@ export default class Repeater implements Component {
         return {
             update: () =>
                 renderings.forEach(_ => _.update()),
+
             destroy: () => {
                 renderings.forEach(_ => _.destroy());
                 templates.forEach(_ => element.appendChild(_));

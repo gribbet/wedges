@@ -23,10 +23,17 @@ export default class KeyedRepeater<T> implements Component {
 
                 state = this.built.map((built, i) => {
 
-                    const existing = state.find(_ => _.key === built.key);
+                    const existingIndex = state.findIndex(_ => _.key === built.key);
 
-                    if (existing !== undefined) {
+                    if (existingIndex !== -1) {
 
+                        templates.map((_, j) => {
+                            const existing = element.children[existingIndex * templates.length + j];
+                            element.insertBefore(existing,
+                                element.children[i * templates.length + j]);
+                        });
+
+                        const existing = state[existingIndex];
                         existing.renderings.forEach(_ => _.update());
                         return existing;
 

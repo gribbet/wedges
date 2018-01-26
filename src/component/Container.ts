@@ -13,7 +13,7 @@ export default class Container implements Component {
                 renderings.forEach(_ => _.update()),
 
             destroy: () =>
-                renderings.forEach(_ => _.destroy())
+                renderings.reverse().forEach(_ => _.destroy())
         }
     }
 

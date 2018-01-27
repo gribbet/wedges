@@ -16,13 +16,16 @@ export default class Template implements Component {
 
     render(element: Element) {
 
-        this.template.forEach(_ =>
+        const template = this.template.map(_ =>
+            _.cloneNode(true));
+
+        template.forEach(_ =>
             element.appendChild(_));
 
         return {
             update: () => undefined,
             destroy: () =>
-                this.template.forEach(_ =>
+                template.forEach(_ =>
                     element.removeChild(_))
         };
     }

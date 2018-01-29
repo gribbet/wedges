@@ -4,8 +4,12 @@ export default class ClassToggler implements Component {
 
     constructor(
         private className: string,
-        private toggled: () => boolean
-    ) { }
+        toggled?: () => boolean
+    ) {
+        this.toggled = toggled || (() => true);
+    }
+
+    private toggled: () => boolean;
 
     render(element: Element) {
 
